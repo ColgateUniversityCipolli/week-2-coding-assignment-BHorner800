@@ -11,7 +11,7 @@
 # Function to integrate
 #################################
 integrand <- function(x){
-  f <- 7 - 2 * x^2
+  f <- (7 - x^2)
   return(f)
 }
 #################################
@@ -38,6 +38,14 @@ right.points <- a + 1:100*(delta.x)
 mid.points <- (left.points+right.points)/2
 (mid.area <- sum(delta.x*(integrand(mid.points))))
 
+
+##################################
+# Trapezoid Rule
+##################################
+left.trap = left.points
+right.trap = right.points
+trap.area = sum((integrand(left.trap) + integrand(right.trap))*(delta.x)/2)
+print(trap.area)
 ################################################################################
 # Question 1(b) Skeleton
 ################################################################################

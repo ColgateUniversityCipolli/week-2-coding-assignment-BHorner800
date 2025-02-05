@@ -36,8 +36,10 @@ While this is a relatively straightforward integral -- split the difference and 
 \end{itemize}
 The first step, is to create a function that computes the integrand.
 <<size="scriptsize", warning=FALSE, message=FALSE>>=
+#the original function at the top of the page is different from the one put in code.
+#Changed function here to match 1.
 integrand <- function(x){
-  f <- 7 - 2 * x^2
+  f <- (7 - x^2)
   return(f)
 }
 @
@@ -68,7 +70,10 @@ mid.points <- (left.points+right.points)/2
   \item Write code that computes the area using the Trapezoidial Rule.\\
   \textbf{Solution:}
 <<size="scriptsize", warning=FALSE, message=FALSE>>=
-# Write code for answer here.
+left.trap = left.points
+right.trap = right.points
+trap.area = sum((integrand(left.trap) + integrand(right.trap))*(delta.x)/2)
+print(trap.area)
 @
   \item Write a function that takes \texttt{a}, \texttt{b}, and number of 
   rectangles (\texttt{n.rect}) in as input and returns the Trapezoidial Rule 
