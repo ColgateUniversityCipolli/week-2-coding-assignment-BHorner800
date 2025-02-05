@@ -88,8 +88,10 @@ The first step, is to create a function that computes the integrand.
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
+\hlcom{#the original function at the top of the page is different from the one put in code.}
+\hlcom{#Changed function here to match 1.}
 \hldef{integrand} \hlkwb{<-} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{)\{}
-  \hldef{f} \hlkwb{<-} \hlnum{7} \hlopt{-} \hlnum{2} \hlopt{*} \hldef{x}\hlopt{^}\hlnum{2}
+  \hldef{f} \hlkwb{<-} \hldef{(}\hlnum{7} \hlopt{-} \hldef{x}\hlopt{^}\hlnum{2}\hldef{)}
   \hlkwd{return}\hldef{(f)}
 \hldef{\}}
 \end{alltt}
@@ -117,7 +119,7 @@ We can compute the area using the Left Rule as follows.
 \hldef{(left.area} \hlkwb{<-} \hlkwd{sum}\hldef{(delta.x}\hlopt{*}\hldef{(}\hlkwd{integrand}\hldef{(left.points))))}
 \end{alltt}
 \begin{verbatim}
-## [1] 8.7464
+## [1] 11.3732
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -129,7 +131,7 @@ We can compute the area using the Right Rule as follows.
 \hldef{(right.area} \hlkwb{<-} \hlkwd{sum}\hldef{(delta.x}\hlopt{*}\hldef{(}\hlkwd{integrand}\hldef{(right.points))))}
 \end{alltt}
 \begin{verbatim}
-## [1] 8.5864
+## [1] 11.2932
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -141,7 +143,7 @@ We can compute the area using the Midpoint Rule as follows.
 \hldef{(mid.area} \hlkwb{<-} \hlkwd{sum}\hldef{(delta.x}\hlopt{*}\hldef{(}\hlkwd{integrand}\hldef{(mid.points))))}
 \end{alltt}
 \begin{verbatim}
-## [1] 8.6668
+## [1] 11.3334
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -152,8 +154,14 @@ We can compute the area using the Midpoint Rule as follows.
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# Write code for answer here.}
+\hldef{left.trap} \hlkwb{=} \hldef{left.points}
+\hldef{right.trap} \hlkwb{=} \hldef{right.points}
+\hldef{trap.area} \hlkwb{=} \hlkwd{sum}\hldef{((}\hlkwd{integrand}\hldef{(left.trap)} \hlopt{+} \hlkwd{integrand}\hldef{(right.trap))}\hlopt{*}\hldef{(delta.x)}\hlopt{/}\hlnum{2}\hldef{)}
+\hlkwd{print}\hldef{(trap.area)}
 \end{alltt}
+\begin{verbatim}
+## [1] 11.3332
+\end{verbatim}
 \end{kframe}
 \end{knitrout}
   \item Write a function that takes \texttt{a}, \texttt{b}, and number of 
@@ -185,14 +193,20 @@ We can compute the area using the Midpoint Rule as follows.
   \hlcom{######################################}
   \hlcom{# Compute Area}
   \hlcom{######################################}
+  \hldef{delta.x} \hlkwb{<-} \hldef{(b}\hlopt{-}\hldef{a)}\hlopt{/}\hldef{n.rect}
+  \hldef{left.points} \hlkwb{<-} \hldef{a} \hlopt{+} \hlnum{0}\hlopt{:}\hldef{(n.rect}\hlopt{-}\hlnum{1}\hldef{)}\hlopt{*}\hldef{(delta.x)}
+  \hldef{right.points} \hlkwb{<-} \hldef{a} \hlopt{+} \hldef{(a}\hlopt{+}\hlnum{1}\hldef{)}\hlopt{:}\hldef{n.rect}\hlopt{*}\hldef{(delta.x)}
   \hlkwa{if}\hldef{(method} \hlopt{==} \hlsng{"Left"}\hldef{)\{}
-    \hlcom{# Add necessary code here}
+    \hldef{area} \hlkwb{<-} \hlkwd{sum}\hldef{(delta.x}\hlopt{*}\hldef{(}\hlkwd{integrand}\hldef{(left.points)))}
   \hldef{\}}\hlkwa{else if}\hldef{(method} \hlopt{==} \hlsng{"Right"}\hldef{)\{}
-    \hlcom{# Add necessary code here}
+    \hldef{area} \hlkwb{<-} \hlkwd{sum}\hldef{(delta.x}\hlopt{*}\hldef{(}\hlkwd{integrand}\hldef{(right.points)))}
   \hldef{\}}\hlkwa{else if}\hldef{(method} \hlopt{==} \hlsng{"Midpoint"}\hldef{)\{}
-    \hlcom{# Add necessary code here}
+    \hldef{mid.points} \hlkwb{<-} \hldef{(left.points}\hlopt{+}\hldef{right.points)}\hlopt{/}\hlnum{2}
+    \hldef{area} \hlkwb{<-} \hlkwd{sum}\hldef{(delta.x}\hlopt{*}\hldef{(}\hlkwd{integrand}\hldef{(mid.points)))}
   \hldef{\}}\hlkwa{else if}\hldef{(method} \hlopt{==} \hlsng{"Trapezoidial"}\hldef{)\{}
-    \hlcom{# Add necessary code here}
+    \hldef{left.trap} \hlkwb{=} \hldef{left.points}
+    \hldef{right.trap} \hlkwb{=} \hldef{right.points}
+    \hldef{area} \hlkwb{=} \hlkwd{sum}\hldef{((}\hlkwd{integrand}\hldef{(left.trap)} \hlopt{+} \hlkwd{integrand}\hldef{(right.trap))}\hlopt{*}\hldef{(delta.x)}\hlopt{/}\hlnum{2}\hldef{)}
   \hldef{\}}\hlkwa{else}\hldef{\{}
     \hlkwd{stop}\hldef{(}\hlsng{"Please select a valid method (e.g., 'Left', 'Right', 'Midpoint', 'Trapezoidial')"}\hldef{)}
   \hldef{\}}
@@ -208,6 +222,11 @@ We can compute the area using the Midpoint Rule as follows.
              \hlkwc{a} \hldef{=} \hlnum{0}\hldef{,}
              \hlkwc{b} \hldef{=} \hlnum{2}\hldef{,}
              \hlkwc{n.rect} \hldef{=} \hlnum{100}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 11.3332
+\end{verbatim}
+\begin{alltt}
 \hlcom{######################################}
 \hlcom{# Compare to numerical integral}
 \hlcom{######################################}
@@ -215,6 +234,9 @@ We can compute the area using the Midpoint Rule as follows.
           \hlkwc{lower} \hldef{=} \hlnum{0}\hldef{,}     \hlcom{# that completes numerical}
           \hlkwc{upper} \hldef{=} \hlnum{2}\hldef{)}     \hlcom{# integration}
 \end{alltt}
+\begin{verbatim}
+## 11.33333 with absolute error < 1.3e-13
+\end{verbatim}
 \end{kframe}
 \end{knitrout}
 \end{enumerate}

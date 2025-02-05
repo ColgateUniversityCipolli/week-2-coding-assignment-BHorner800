@@ -46,6 +46,8 @@ left.trap = left.points
 right.trap = right.points
 trap.area = sum((integrand(left.trap) + integrand(right.trap))*(delta.x)/2)
 print(trap.area)
+
+
 ################################################################################
 # Question 1(b) Skeleton
 ################################################################################
@@ -69,14 +71,20 @@ riemann.sums <- function(fnct,                        # function to integrate
   ######################################
   # Compute Area
   ######################################
+  delta.x <- (b-a)/n.rect
+  left.points <- a + 0:(n.rect-1)*(delta.x)
+  right.points <- a + (a+1):n.rect*(delta.x)
   if(method == "Left"){
-    # Add necessary code here
+    area <- sum(delta.x*(integrand(left.points)))
   }else if(method == "Right"){
-    # Add necessary code here
+    area <- sum(delta.x*(integrand(right.points)))
   }else if(method == "Midpoint"){
-    # Add necessary code here
+    mid.points <- (left.points+right.points)/2
+    area <- sum(delta.x*(integrand(mid.points)))
   }else if(method == "Trapezoidial"){
-    # Add necessary code here
+    left.trap = left.points
+    right.trap = right.points
+    area = sum((integrand(left.trap) + integrand(right.trap))*(delta.x)/2)
   }else{
     stop("Please select a valid method (e.g., 'Left', 'Right', 'Midpoint', 'Trapezoidial')")
   }
